@@ -41,7 +41,12 @@ used.
 
 #### Area report:
 
+![5 area 1](https://github.com/user-attachments/assets/387724ae-a47b-4b6d-932f-7152be2bdc04)
+
 #### Power Report:
+
+![5 power 2](https://github.com/user-attachments/assets/38f84838-3e05-43c8-b9f9-065e03669a54)
+
 
 #### Result: 
 
