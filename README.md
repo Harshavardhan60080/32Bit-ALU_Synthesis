@@ -1,46 +1,70 @@
-# 32Bit-ALU_Synthesis
+Exp-No:5 - 32 Bit ALU-Synthesize the Gate Level Netlist and tabulate Area and Power reports.(Using Genus in Cadence)
+Aim:
+  Synthesize 32 Bit ALU design using Constraints and analyse area and Power reports.
 
-## Aim:
+Tool Required:
+  Functional Simulation: Incisive Simulator (ncvlog, ncelab, ncsim)   Synthesis: Genus
 
-Synthesize 32 Bit ALU design using Constraints and analyse area and Power reports.
+Step 1: Getting Started
+  Synthesis requires three files as follows,
 
-## Tool Required:
+    ◦ Liberty Files (.lib)
 
-Functional Simulation: Incisive Simulator (ncvlog, ncelab, ncsim)
+    ◦ Verilog/VHDL Files (.v or .vhdl or .vhd)
 
-Synthesis: Genus
+Step 2 : Creating an SDC File
+  • In your terminal type “gedit input_constraints.sdc” to create an SDC File if you do not have one.
 
-### Step 1: Getting Started
+  • The SDC File must contain the following commands;
 
-Synthesis requires three files as follows,
+    create_clock -name clk -period 2 -waveform {0 1} [get_ports "clk"]
 
-◦ Liberty Files (.lib)
+    set_clock_transition -rise 0.1 [get_clocks "clk"]
 
-◦ Verilog/VHDL Files (.v or .vhdl or .vhd)
+    set_clock_transition -fall 0.1 [get_clocks "clk"]
 
-### Step 2 : Performing Synthesis
+    set_clock_uncertainty 0.01 [get_ports "clk"]
 
-The Liberty files are present in the library path,
+    set_input_delay -max 0.8 [get_ports "rst"] -clock [get_clocks "clk"]
 
-• The Available technology nodes are 180nm ,90nm and 45nm.
+    set_output_delay -max 0.8 [get_ports "count"] -clock [get_clocks "clk"]
 
-• In the terminal, initialise the tools with the following commands if a new terminal is being
-used.
+    i→ Creates a Clock named “clk” with Time Period 2ns and On Time from t=0 to t=1.
 
-◦ csh
+    ii, iii → Sets Clock Rise and Fall time to 100ps.
 
-◦ source /cadence/install/cshrc
+    iv → Sets Clock Uncertainty to 10ps.
 
-• The tool used for Synthesis is “Genus”. Hence, type “genus -gui” to open the tool.
+    v, vi → Sets the maximum limit for I/O port delay to 1ps.
 
-• Genus Script file with .tcl file Extension commands are executed one by one to synthesize the netlist.
+Step 3 : Performing Synthesis
+  The Liberty files are present in the library path,
 
-#### Synthesis RTL Schematic :
+    • The Available technology nodes are 180nm ,90nm and 45nm.
 
-#### Area report:
+    • In the terminal, initialise the tools with the following commands if a new terminal is being used.
 
-#### Power Report:
+    ◦ csh
 
-#### Result: 
+    ◦ source /cadence/install/cshrc
 
-The generic netlist of 32 bit ALU  has been created, and area, power reports have been tabulated and generated using Genus.
+    • The tool used for Synthesis is “Genus”. Hence, type “genus -gui” to open the tool.
+
+    • Genus Script file with .tcl file Extension commands are executed one by one to synthesize the netlist.
+
+Synthesis RTL Schematic:
+![5 op 2](https://github.com/user-attachments/assets/a9867dbd-e297-45a6-82f0-0b55b98ef70f)
+
+
+Area report:
+
+![5 area 1](https://github.com/user-attachments/assets/22d353b3-58d6-4c1c-904f-bfacc65b4c25)
+
+
+Power Report:
+
+![5 power 1](https://github.com/user-attachments/assets/f1baee82-16d5-45fa-8e78-06d6b5d25293)
+
+
+Result:
+  The generic netlist of 32 bit ALU has been created, and area, power reports have been tabulated and generated using Genus.
